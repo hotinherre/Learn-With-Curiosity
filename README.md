@@ -1,5 +1,8 @@
 # Learn With Curiosity
 
+Curiosity is where learn starts! Target a topic, learn and explore a little everyday.  
+![Logo](logo.jpg)
+
 ## Code Under The Hood
 
-* [How does programs run](How-Does-Programs-Run.md)
+* [How Does Program Runs](How-Does-Programs-Run.md)
