@@ -19,7 +19,21 @@ Many language in mordern days takes compiler and interpreter at the same time. L
 
 JIT compilation is a combination of the two traditional approaches of translation – ahead-of-time compilation (AOT), and interpretation. The system implementing the JIT will continuously analyses the running code and identifies the part of the code where the speedup gained from compliation or rearrangement outweight the overhead. For example, optimize the repeatedly used functions or 1000 iteration loops.
 
-## What is Runtime-Enviroment/Virtual Machine?
+## Dynamic lib vs Static Lib
+
+### Static Lib
+
+Compile main app and static lib toghether, then execute the bundle of them. It will make the app size larger.
+
+### Static/Shared Lib
+
+Reference static/shared lib in the runtime. They are independent from your running app.
+
+## What is Linking and Loading
+
+C/C++ knowledge. No interested in them for now.
+
+## What is Runtime-Enviroment/Virtual Machine
 
 ### RunTime
 
@@ -30,19 +44,20 @@ The time when code is being executed. It is often refered to the runtime envirom
 - `System VM` provide a substitue of a real machine. It provides funtionality needed to execute entire OS.
 - `Process VM` provide a platform-independant programming environment that abstract away the detail of underlying hardware/OS and allows program to execute in same way on any platform. Same language syntax works on differetn platform, as programmer, we don't need to worry about how our code interactive with different OS and platform. Process VM are usually implemented using interpreter, the performance can be improved by the use of JIT compilation.
   
-## How Python runs?
+## How Python runs
 
-Python run-time first compile source code into bytecode(*.pyc), then interpret bytecode and execute in VM.  
-There is different implementation of python, interpreter will execute code in different place. cpython -> vm, jyphon -> jvm, pypy use jit and vm.  
+Python run-time first compile source code into bytecode, then interpret bytecode and execute in VM.  
+There is different implementation of python, interpreter will execute code in different place. cpython -> vm, jyphon -> jvm, pypy use jit and vm.
 
-## How Java runs?
+### How python modules work
+
+*.pyc will speed up the loading time. If the creation time doesn't match with the modification time of its source code, it will be ignored. Content of *.pyc is platform independant. We can remove *.py and only keep *.pyc to avoid reverse engineering.  
+When interpreter start interpreting main app, it will load modules in the context.
+
+
+## How Java runs
 
 - Compile java code to bytecode.
 - Using JIT to interpret bytecode in JVM.
 
-## How JS runs?
-
-## How Typescript runs?
-
-## How GO runs?
-
+## How GO runs
