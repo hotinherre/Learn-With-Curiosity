@@ -46,7 +46,7 @@ Gateway can be router, switch, isp router... Sending request to external network
 
 LAN: Local Area network.
 
-## HUB vs Switch vs Router
+## HUB vs Switch
 
 - HUB(physical layer): Simple and cheap. broadcast packet to all connected host.
 - Switch(data link layer):  At first behave like HUB. But it will remember the location and MAC ADDR of each host over the time. Then it can direct packet to exact target host.
@@ -58,12 +58,6 @@ Use STP(spanning tree protocal) algorithm to resolve Broadcast storm problem.
 1. physical partition with different switch
 2. Use VLAN. set vlan id tag in packet.
 
-- Router(network layer):
-    - connect LAN to other network like internet
-    - Assign IP address to host with DHCP
-    - Provide WIFI signal
-    - network address translation
-
 ## Ping and Traceroute
 
 **Ping** command send ICMP request to target network host.
@@ -71,3 +65,42 @@ Return success response(responce time, sequence ID) or error message if packet i
 
 **Traceroute** command prints route packets take to get to network host.
 
+## Router
+
+- connect LAN to other network like internet. Work as gateway.
+- Assign IP address to host with DHCP
+- Provide WIFI signal
+- network address translation(NAT)
+
+### Router Protocals
+
+1. static: mannualy set up routing strategy  
+2. dynamic protocal: find shortest path between two router
+    1. distance vector routing(bellman-ford)
+    2. link state routing(dijkstra):OSPF, BGP
+
+
+
+### local network
+
+- Build packet: source MAC/IP, target MAC(Router/Switch)/IP(Target host)
+- Send to Router
+- Router Use ARP find target mac address. Router rewrite target MAC ADDR.
+- Send to target host
+
+### access public network with NAT
+
+total number of ipv4 is 4.2 billion. A workaround to let private device connect to public without having public ip address. All local host connect to router which has public IP assigned by ISP.
+
+192.168.x.x and 10.x.x.x are two ranges reserved for private network.  
+
+Steps host send request to web server:
+
+- Build packet: source MAC/(IP:port), target MAC(Router)/(IP:port)(Target host). Port is 80 if use http protocal.
+- Send to Router
+- Router change target MAC with ARP.
+- Router change source IP:port.
+- Router add record in NAT forwarding table. Private ip:port -> public ip:port
+- Router forward packet to target host
+- When response comes back to router, router will look up NAT forwarding table. Create another packet, make the packet seems sent from server to local host directly.
+  
