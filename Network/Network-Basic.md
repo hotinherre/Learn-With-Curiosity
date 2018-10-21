@@ -35,10 +35,6 @@ IP 被分为 5 类. abcde. 划分不合理，使用度不高。
 
 ID for NIC(network interface card). Works in local network. For external network, look for IP address first.
 
-## gateway
-
-Gateway can be router, switch, isp router... Sending request to external network(has different network number), need to pass through gateway.
-
 ## DCHP
 
 1. dynamically allocate ip to device. Map ip to mac address.
@@ -79,8 +75,6 @@ Return success response(responce time, sequence ID) or error message if packet i
     1. distance vector routing(bellman-ford)
     2. link state routing(dijkstra):OSPF, BGP
 
-
-
 ### local network
 
 - Build packet: source MAC/IP, target MAC(Router/Switch)/IP(Target host)
@@ -104,3 +98,14 @@ Steps host send request to web server:
 - Router forward packet to target host
 - When response comes back to router, router will look up NAT forwarding table. Create another packet, make the packet seems sent from server to local host directly.
   
+## UDP vs TCP
+
+use port number to identify target/recource.
+
+### UDP
+
+stateless protocal. No order and delivery gurantee. Used in streaming, online video game and other scenario doesn't care about the complete of packet.
+
+### TCP
+
+stateful protocal. 3 handshake to make connection. Use sliding window and buffer to gurantee packet order and completeness. Have capbility to do trafic control and congest control. Algorithm and mechanism is pretty complex.. Not paying attention to how the internal works..
