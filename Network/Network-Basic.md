@@ -109,3 +109,44 @@ stateless protocal. No order and delivery gurantee. Used in streaming, online vi
 ### TCP
 
 stateful protocal. 3 handshake to make connection. Use sliding window and buffer to gurantee packet order and completeness. Have capbility to do trafic control and congest control. Algorithm and mechanism is pretty complex.. Not paying attention to how the internal works..
+
+## Socket
+
+low level OS API to send and receive data from different host. Unless you need to implement your own protocal, usually developer won't touch this complex api.  Each socket will be kept in memory.  The limitation for supporting multiple request is memory and fd.
+
+## HTTP
+
+Most http api is built on top of XMLHttpRequest. Which makes AJAX programming happens. Send request to server and process reponse data asyncronously.  For other web communication API, 1) Server push: server-sent event  2) two-day tunnel: websocket.  
+
+HTTP is stateless, but it is sessionful by using cookies and authentication headers.
+
+### HTTP Request
+
+* First line of HTTP: method path http-version
+* HTTP Header
+* HTTP Body
+
+### HTTP Response
+
+* First line of HTTP: HTTP-version Status-Code Status message
+* HTTP Header
+* HTTP Body
+  
+### HTTP Workflow
+
+Application layer: initialize http request.
+Transport layer: Divide HTTP Body data into small packet. Append port number. Make TCP connetion.
+Internet layer: Append IP.
+Data Link Layer: Append MAC with ARP.
+
+
+### HTTP 2.0
+
+Encapsulating http message into frame(binary data).  
+Then HTTP/2 provide optimizaiton:  
+1. Compression on header with index table.
+2. Mutipleplexing. Send mutiple request in parallel to reduce TCP connection.(HTTP 1.1 send syncronously)
+
+### QUIC
+
+Quick UDP internet connection. Use UDP to improve performance of TCP used in web apps. Still experimental protocal, designed by Google.
