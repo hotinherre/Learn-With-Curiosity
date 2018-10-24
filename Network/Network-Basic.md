@@ -150,3 +150,45 @@ Then HTTP/2 provide optimizaiton:
 ### QUIC
 
 Quick UDP internet connection. Use UDP to improve performance of TCP used in web apps. Still experimental protocal, designed by Google.
+
+### HTTP Caching
+
+- private caching, public caching.
+- change caching strategy by set up http header.
+- max-age=<...seconds>
+
+### HTTP Cookies
+
+cookies is small piece of data that a server sends to the user's browser by `Set-Cookie` header. Browser store it and send it back to the same server with subsequent request.
+
+```text
+HTTP/1.0 200 OK
+Content-type: text/html
+Set-Cookie: yummy_cookie=choco
+Set-Cookie: tasty_cookie=strawberry
+[page content]
+```
+
+```text
+GET /sample_page.html HTTP/1.1
+Host: www.example.org
+Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+```
+
+#### Purpose
+
+- session management
+- Personalization
+- tracking for ads
+
+Without specifying `Max-Age` or `Expires`, cookie will be deleted when browser is closed.  
+Set-Cookie with `HTTPOnly` will blocks JS `Document.cookie` API.
+
+#### Scope of cookies
+
+if `Domain` is specified, then subdomains are always included. Otherwise, exluding subdomains.  
+For example, if domain=mozilla.org, then cookies are included on subdomains like developer.mozilla.org  
+
+`Path` indicates a URL path must exist in the requested URL in order to send the Coockie Header.
+
+
