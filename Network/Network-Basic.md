@@ -166,6 +166,7 @@ HTTP/1.0 200 OK
 Content-type: text/html
 Set-Cookie: yummy_cookie=choco
 Set-Cookie: tasty_cookie=strawberry
+
 [page content]
 ```
 
@@ -191,4 +192,25 @@ For example, if domain=mozilla.org, then cookies are included on subdomains like
 
 `Path` indicates a URL path must exist in the requested URL in order to send the Coockie Header.
 
+### CORS
 
+Use additional HTTP headers to enable cross origin resource sharing.
+Client side send option request as preflight request before real resource request.
+
+### Evolution of HTTP
+
+- HTTP/0.9, request is one line, response is html only.
+- HTTP/1.0, 1)add headers, 2) add status code/message in response 3) able to transmit different types of data
+- HTTP/1.1, 1)reuse connection(persistent connection) 2) add cache control
+- HTTP/2.0, 1)binary protocal,divide hears/data into frames 2)enable multiplexing 3) compress headers by index table
+
+## HTTPS
+
+HTTPS is an encrypted version of the HTTP protocol. It use SSL/TLS to encrypt all data.
+
+### Asymmetric encription
+
+Encode with public key, decode with private key.
+Encode with private key, decode with public key.
+
+IN HTTPS, public key is a digital certificate issued by a trusted CA.

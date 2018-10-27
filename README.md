@@ -20,3 +20,7 @@
 ## Network
 
 - [Network Basic](Network/Network-Basic.md)
+
+## Tech Talk I watched
+
+- [Oct-Dec](TechTalk/Oct-Dec.md)
