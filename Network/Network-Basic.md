@@ -214,3 +214,55 @@ Encode with public key, decode with private key.
 Encode with private key, decode with public key.
 
 IN HTTPS, public key is a digital certificate issued by a trusted CA.
+
+## File Transfer Protocal 
+
+### FTP 
+
+- Transfer files between client and server
+- One TCP connection to send command from client to server. List,reter, store.
+- One TCP connection to every file transmitting.
+
+### P2P
+
+- Download and share block files with other peers in the network.
+- Have a tracker server to maintain the info of which peer has which file
+- DHT: No more tracker server. Save part of node info in each node in the p2p network.
+
+## DNS
+
+- DNS server keep track of Domain name to IP address mapping.  
+- DNS look up may go to mutiple layer DNS server, root -> first -> second.  
+- Usually local network has set up local DNS server.
+- DNS are cached in OS. 
+- Set local DNS record in /etc/hosts.
+- Enable load balancing by mapping one domain name to mutiple IP.
+
+### DNS record
+
+#### A Record and AAAA Record
+pointing domain name to IPv4/IPv6.  
+Google.com =   8.8.8.8
+
+#### CNAME(alias)
+Point one domain name to another domain name. Which makes it as an alias.  
+www.Google.com(alias) = Google.com. ALlows the domain to resolve same server with or without www. subdomain.  
+If using A record, it requires to update mutiple record, when ip changes. With alias, you only need to change A record. 
+
+#### MX(Mail Exchange)
+point mail address to mail server. Always try to send the mail server with lowest priority order first.
+
+#### SRV(Service Record)
+- Location of service on the network
+- Contains several setting data
+- Created automatically by applications
+
+
+
+
+
+
+
+
+
+
