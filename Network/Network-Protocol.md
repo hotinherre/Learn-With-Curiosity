@@ -247,6 +247,7 @@ Google.com =   8.8.8.8
 #### CNAME(alias)
 Point one domain name to another domain name. Which makes it as an alias.  
 www.Google.com(alias) = Google.com. ALlows the domain to resolve same server with or without www. subdomain.  
+
 If using A record, it requires to update mutiple record, when ip changes. With alias, you only need to change A record. 
 
 #### MX(Mail Exchange)
@@ -257,12 +258,28 @@ point mail address to mail server. Always try to send the mail server with lowes
 - Contains several setting data
 - Created automatically by applications
 
+### HTTPDNS
+
+Set up private DNS server for service to bypass cannonical DNS server. Which will improve DNS look up speed and avoid DNS expired caching problem.
+
+## CDN
+
+Content deliver network is a geographically distributed network. ITs goal is to deliver content(web, js, image, video..) to end-users with high availability and performace. Most major website like FB, Netflix highly adopted CDN.
+End-user can load page faster by download file from closer CDN instead of remote web host.
+
+### How CDN work?
+
+![](https://static001.geekbang.org/resource/image/d8/cc/d8c77f59d6b7ac894b5192252239cfcc.jpg)
+![](https://static001.geekbang.org/resource/image/a9/02/a94d543020d85c8feb9cd665eb4a3502.jpg)
+- Look up web server DNS record.
+- return CNAME pointing to CDN server
+- return CNAME pointing to CDN lb
+- LB returns clostest server ip which may contain the require resouce
+- access ip, try download resouce, if not there send request to upper level cdn server.
+- if all CDN server doesn't contains requested file, CDN will send request to original web server.
 
 
+### What is varnish
 
-
-
-
-
-
-
+- varnish is a cache layer exclusively on HTTP and static content.  
+- It saves the copy of static information client-side request from server.

@@ -19,7 +19,7 @@
 
 ## Network
 
-- [Network Basic](Network/Network-Basic.md)
+- [Network Protocol](Network/Network-Protocol.md)
 
 ## Tech Talk I Watched
 
