@@ -283,3 +283,29 @@ End-user can load page faster by download file from closer CDN instead of remote
 
 - varnish is a cache layer exclusively on HTTP and static content.  
 - It saves the copy of static information client-side request from server.
+
+## Data center
+
+Build that holds tons of computers.
+
+### Layer 1 - access layer
+
+one rack of server and top of rack switch 
+
+### Layer 2 - aggregation layer
+
+A group of aggregation switch connects with numbers of racks of server.  
+Entire group called available zone.
+
+### Layer 3 - core layer
+
+A group of core router connects with mutiple AZs. Enable communication among AZ and AZ to network.
+
+## VPN
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Virtual_Private_Network_overview.svg/495px-Virtual_Private_Network_overview.svg.png)
+
+Enable users to connect a private network through a VPN server as if user computer is directly connected with private network.  
+- Allow user to access corporate newtork resource remotely
+- Stay anonymous on the internet
+- Bypass firewalls
