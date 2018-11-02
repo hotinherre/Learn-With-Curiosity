@@ -1,4 +1,6 @@
-# Network Basic
+# 学习笔记 for 趣谈网络协议
+
+This is personal study notes for [极客时间－趣谈网络协议](https://time.geekbang.org/column/85)
 
 ## OSI Model
 
@@ -309,3 +311,26 @@ Enable users to connect a private network through a VPN server as if user comput
 - Allow user to access corporate newtork resource remotely
 - Stay anonymous on the internet
 - Bypass firewalls
+
+## Network in virtual machine
+
+- virtualize NIC for VM. 
+- Connect VM NIC and physical NIC together with virtual network bridge. They all have same subnet mask.
+- Use physical NIS to communicate with outside network
+- Use vlan tag to group and separate VM across different computer.
+
+## SDN
+
+- SDN is short for Software defined network.  
+- It decouple traditional web device into control plane and data plane.
+- control plane is a group of server that manage data plane. Allow Network admin manage entire network programatically in one centralized spot.
+- data plane is network hardware that passing packet around: Switch, router, bridge.
+
+## Firewall with iptables
+
+With linux CLI iptables, admin can set up firewall rules with complex strategies and filters on incoming and outgoing packet.
+
+## QoS - Quality of Service
+
+Give priority order for packet. Packet with higher priority will pass through network faster.
+
