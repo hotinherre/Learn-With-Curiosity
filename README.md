@@ -25,6 +25,10 @@
 
 - [Oct-Dec](TechTalk/Oct-Dec.md)
 
+## Good Practise of Software Development
+
+- [Design-Pattern](SoftwareDev/Design-Patterns)
+
 ## Paper I Read
 
 ## Code I Read
