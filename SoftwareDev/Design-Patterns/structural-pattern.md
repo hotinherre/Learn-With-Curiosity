@@ -47,3 +47,25 @@ Troll troll = new SimpleTroll();
 // change the behavior of the simple troll by adding a decorator
 Troll clubbedTroll = new ClubbedTroll(troll);
 ```
+
+## Facade
+
+Defines a unified interface for a set of interfaces of subsystem. It make subsystem easier to use. Wrap up a complicated subsystem with a simpler interface.
+
+# Flyweight
+
+Create object quickly by using factory to modify and return existing object.
+
+# Private Class Data
+
+encapsulate a series of class attributes separate private data class to prevent further modification after construction.
+
+# Proxy
+
+Provide an extra abstraction level above object.
+
+1. virtual proxy: create object when user request object at first time
+2. remote proxy provides local representative. Used in RPC.
+3. protective proxy controls access to object by checking if requester has required permission prior to forwarding the request.
+4. counting number of reference so that it can be further freed when no more reference
+5. check if object is locked to ensure consistency.

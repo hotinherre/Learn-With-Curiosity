@@ -5,6 +5,8 @@ Design pattern is general repeatable solution for common problems occuring in so
 ## List of Design Patterns
 
 - [Creational Patterns](creational-pattern.md)
+- [Structural Patterns](structural-pattern.md)
+- [behavioral Patterns](behavioral-pattern.md)
 
 ## Reference
 
