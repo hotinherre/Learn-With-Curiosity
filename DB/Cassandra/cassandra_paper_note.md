@@ -1,2 +1,0 @@
-# Note for Cassandra Paper
-
