@@ -13,6 +13,11 @@ When client request a write or read, it choose a random server as coordinator, c
 
 Node repair(remove entropy). Reparing node make node to sync up with other node holding same replica and update the stale data.
 
+## Multi Data Center
+
+Multi data center Cassandra is a bunch of independent clusters deployed in different data center that keep synchronized and consistent with one another.  
+For write request, select one node of one datacenter as coordinator, beside communicate and write to nodes of local datacenter, coordinator also talk to other cluster and find a remote coordinator to do the write remotely.
+
 ## reference
 - https://docs.datastax.com/en/cassandra/3.0/cassandra/architecture/archIntro.html
 - https://learning.oreilly.com/videos/mastering-cassandra-essentials/9781491994122/9781491994122-video314884
