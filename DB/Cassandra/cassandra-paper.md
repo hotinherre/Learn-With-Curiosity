@@ -1,4 +1,2 @@
 # Cassandra Paper Note
 
-
-
