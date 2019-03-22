@@ -18,6 +18,17 @@ Node repair(remove entropy). Reparing node make node to sync up with other node 
 Multi data center Cassandra is a bunch of independent clusters deployed in different data center that keep synchronized and consistent with one another.  
 For write request, select one node of one datacenter as coordinator, beside communicate and write to nodes of local datacenter, coordinator also talk to other cluster and find a remote coordinator to do the write remotely.
 
+## Propagate node health state
+
+### naive way
+ 
+Each node periodically talk to all the other node. Expensive, and less efficient.
+
+### gossip
+
+Node A talk to a random node B, then share each other info and the other node info they recently hear about. 
+
+
 ## reference
 - https://docs.datastax.com/en/cassandra/3.0/cassandra/architecture/archIntro.html
 - https://learning.oreilly.com/videos/mastering-cassandra-essentials/9781491994122/9781491994122-video314884
