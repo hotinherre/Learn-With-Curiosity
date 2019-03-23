@@ -29,11 +29,19 @@ Each node periodically talk to all the other node. Expensive, and less efficient
 Node A talk to a random node B, then share each other info and the other node info they recently hear about. 
 
 ### Write in Cassandra
+
 In cassandra, write is faster than write due to following architecture.
 
-1. Write to commited log on disk. Each node has one commited log. If a write fails in the middle, cassandra can read from commited log and redo the write.
+1. Write to commited log on disk. Each node has one commit log. If node crashes before memtable is flushed, cassandra use commit log to restore last memtable.
 2. Write into memtable. Each cassandra table has one memtable. Memtable contains record of that table with key ordered.
-3. if memetable is full, flush memtable into SStable in disk. Each sstable is a copy of one memtable. SStable is immutable, to delete or update a record, just add a new record to sstable, clients only select the newest version. To delete, it mark the record as delete with tombstone.
+3. if memetable is full, flush memtable into SStable in disk. sstable is a file sorted by partition key. Each sstable is a copy of one memtable. SStable is immutable, to delete or update a record, just add a new record to sstable, clients only select the newest version. To delete, it mark the record as delete with tombstone.
+
+### Read in Cassandra
+It is a process of assembling rows and columns we need.
+
+1. Read from memtable. super fast, if found a complete row(it is not complete when the record is a one field update), then it must be the most recent data, since it hasn't been written into disk. Return it to client.
+2. Go to sstable. At the header of SStable, there is a `bloom filter` that can tell either a `certain negative` that key not in this table or `likely positive` that key is probably in this table.
+
 
 
 ## reference
