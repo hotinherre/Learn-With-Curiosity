@@ -1,9 +1,22 @@
 # Cassandra Architecture 
 
+## Partitioner
+
+A partitioner determines which node will receive the first replica of a piece of data, and how to distribute other replicas across other nodes in the cluster.
+
+## Snitch
+
+A snitch determines which datacenters and racks nodes belong to
+
 ## Replication
 
 - Replica factor is the copy of the data. 
-- Replica placement is how to store the replica data. Usually using simple strategy, where save replica in continuous nodes.
+- Replica placement strategy is how to store the replica data. 
+
+### replication strategy
+- SimpleStrategy: used in single datacenter. place first on a node determined by partitioner, then place additional replica on the next nodes clockwise in the ring.
+- NetworkTopologyStrategy: used in multi-datacenter. Try to place replica in different racks.
+
 
 ## Consistency
 
@@ -18,15 +31,17 @@ Node repair(remove entropy). Reparing node make node to sync up with other node 
 Multi data center Cassandra is a bunch of independent clusters deployed in different data center that keep synchronized and consistent with one another.  
 For write request, select one node of one datacenter as coordinator, beside communicate and write to nodes of local datacenter, coordinator also talk to other cluster and find a remote coordinator to do the write remotely.
 
-## Propagate node health state
+## Propagate node state information
 
 ### naive way
  
 Each node periodically talk to all the other node. Expensive, and less efficient.
 
-### gossip
+### gossip protocol
 
-Node A talk to a random node B, then share each other info and the other node info they recently hear about. 
+Gossip is a peer-to-peer communication protocol in which nodes periodically exchange state information about themselves and about other nodes they know about. Gossip runs every second and exchanges stat message up to 3 nodes in the cluster.
+
+Cassandra use node state infomation to avoid routing request to node which are down or performing poorly.
 
 ### LSM Write in Cassandra
 
