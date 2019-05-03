@@ -37,7 +37,9 @@ For normal polling, consumer may end up make many get call with no response. Kaf
 
 Most message system keep track of consumer position in server. When message is sent out, message is marked as sent. When server receive acknowledgement from consumer, message is marked as consumed. Then server should notify consumer the message is marked as consumed. Failure of each step my need retry.
 
-Kafka mark consumer position as offset for each partition and each consumer. It is just an integer. And this design allows consumer to rewind back to old offset
+Kafka mark consumer position as offset for each partition and each consumer. It is just an integer. And this design allows consumer to rewind back to old offset.
+
+The group coordinator store offset for consumer group. Offset is saved as normal topic named as __consumer_offset. The broker sends offset commit acknowledgement only when all replica receive this offset. Broker periodically compact offset topics, since only most recent one is needed. Also, most recent offset is put in the cache.
 
 ### Offline Data Load
 
@@ -93,3 +95,19 @@ log companction is handle by log cleaner in background. It remove the old record
 limit resource for consumer and producer.
 - netword bandwith quota
 - request rate quota
+
+## Zookeeper
+
+### broker node meta
+```
+/brokers/ids/[0...N] --> 
+{"jmx_port":...,"timestamp":...,"endpoints":[...],"host":...,"version":...,"port":...}
+```
+
+### broker topic meta
+```
+/brokers/topics/[topic]/partitions/[0...N]/state --> 
+{"controller_epoch":...,"leader":...,"version":...,"leader_epoch":...,"isr":[...]} (ephemeral node)
+```
+
+
