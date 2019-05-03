@@ -63,3 +63,33 @@ For latency sensitive system, producer don't need to wait for all replica finish
 
 For at most once, consumer update offset before processing. If consumer crash, then data is lost.  
 For at least once, consumer update offset after processing. Data is never lost, but same data may be reprocessed.
+
+
+## Replication
+
+unit of replication is topic partition. Each parition has one leader and 0+ followers. Read write goes to leader. Leaders are evenly distributed among brokders. The logs on followers suppose to be identical to leaders, there may be some latency, but finally will be the same.Followers consume message from leader by pulling.
+
+In-sync follower node has two conditions:
+- maintain session with zookeeper
+- it cannot fall too far behind from leader
+leader tracks in-sync nodes, if one of them fails, remove it from list.
+
+message is considered committed when all ISR replicate the message. Only commited message are given out to consumers. ISR is persisted in zookeeper.
+
+When all ISR dies:
+- choose first ISR comes back, takes long time or maybe forever to recover.
+- choose first remaining replica. Some data maybe lost.
+
+two topic-level configuration to choose durability over availability:
+- disable unclean leader election. Only ISR can be leadere
+- sepcify a minimum ISR size. If there is not enough ISR, log is not commited.
+
+## Log Compaction
+
+log companction is handle by log cleaner in background. It remove the old record with same key, only keey the most recent one.
+
+## Quotas
+
+limit resource for consumer and producer.
+- netword bandwith quota
+- request rate quota
