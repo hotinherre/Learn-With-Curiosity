@@ -24,6 +24,12 @@ Course Link: https://www.youtube.com/watch?v=e7Pr1VgPK4w&list=PLlTjty5ceOnd-sCYE
     - [1NF](#1nf)
     - [2NF](#2nf)
     - [3NF](#3nf)
+  - [Index](#index)
+    - [cluster index](#cluster-index)
+    - [non-cluster index](#non-cluster-index)
+- [Join](#join)
+  - [Inner-Join](#inner-join)
+  - [Outer-Join](#outer-join)
 
 ## Data integrity
 
@@ -179,3 +185,35 @@ every non-key attribute must depend on the every whole candidate key. If attribu
 
 3NF table doesn't have transitive dependencies. 
 Transitive dependency: attribute C depend on B, B depend on primary key. 
+
+## Index
+
+### cluster index
+
+table row stored in the same order as cluster index, therefore, there is only one cluster index.
+
+### non-cluster index
+non-cluster index create a list that has pointer pointing back to original table row.
+
+# Join
+
+## Inner-Join
+
+select records that have matching values in both tables.
+
+```sql
+SELECT username, title, comment
+FROM user
+INNER JOIN comment
+ON user.user_id = comment.user_id
+INNER JOIN video
+ON comment.video_id = video.video_id
+```
+
+## Outer-Join
+
+shows all record of one table. If there is no matching record, the column is null.
+
+- left join
+- right join
+- full join
